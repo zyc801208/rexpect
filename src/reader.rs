@@ -267,6 +267,15 @@ impl NBReader {
             None
         }
     }
+
+    pub fn try_read_all(&mut self) -> Option<String> {
+        // discard eventual errors, EOF will be handled in read_until correctly
+        let _ = self.read_into_buffer();
+        if self.buffer.len() > 0 {
+            return Some(self.buffer.drain(..).collect());
+        }
+        None
+    }
 }
 
 #[cfg(test)]

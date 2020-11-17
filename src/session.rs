@@ -98,6 +98,10 @@ impl<W: Write> StreamSession<W> {
         self.reader.try_read()
     }
 
+    pub fn try_read_all(&mut self) -> Option<String> {
+        self.reader.try_read_all()
+    }
+
     // wrapper around reader::read_until to give more context for errors
     fn exp(&mut self, needle: &ReadUntil) -> Result<(String, String)> {
         self.reader.read_until(needle)
