@@ -176,6 +176,9 @@ pub struct PtySession {
     pub commandname: String, // only for debugging purposes now
 }
 
+unsafe impl Send for PtySession {}
+unsafe impl Sync for PtySession {}
+
 // make StreamSession's methods available directly
 impl Deref for PtySession {
     type Target = StreamSession<File>;
